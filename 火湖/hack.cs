@@ -32,12 +32,13 @@ namespace injectDll
 
         public void Start()
         {
-            
+           
         }
         public void Update()
         {
             this.npcs = gameMgr.aliveNpcs;
             this.player.SetPlayer(gameMgr.PlayerScript);
+        }
 
             Camera cam = gameMgr.currentCamera;
             double mouseSmoothing = 2.0;
@@ -62,7 +63,7 @@ namespace injectDll
 
             if (cam == null)
                 return;
-            
+
             if (targetNpc != null)
             {
                 GUI.Label(new Rect(10, 10, 300, 20),
@@ -98,11 +99,11 @@ namespace injectDll
                         if (hitbox == null || !hitbox.LabelShort.Contains("Head") )
                         {
                             continue;
-                        }
+            }
                         ESP.UniversalESP(hitbox.transform.position, cam, true, true, 2);
                         UpdateTargetNpcByMouse(cam, npc);
                     }
-                    
+            
                     
                     
                 }
@@ -128,23 +129,23 @@ namespace injectDll
                     return;
                 foreach (var hiddenChests in room.hiddenChests)
                 {
-                    float distance = Vector3.Distance(
-                    this.player.GetPlayer().transform.position,
-                    hiddenChests.transform.position
-                    );
+                float distance = Vector3.Distance(
+                this.player.GetPlayer().transform.position,
+                hiddenChests.transform.position
+                );
                     Draw(hiddenChests.transform.position, this.player, cam, $"Chests:{hiddenChests.name} Dis:{distance}", Color.red);
 
 
-                }
+            }
 
                 foreach (var containers in room.containers)
-                {
-                    float distance = Vector3.Distance(
-                    this.player.GetPlayer().transform.position,
-                    containers.transform.position
-                    );
+            {
+                float distance = Vector3.Distance(
+                this.player.GetPlayer().transform.position,
+                containers.transform.position
+                );
                     Draw(containers.transform.position, this.player, cam, $"Containers:{containers.name} Dis:{distance}", Color.green);
-                }
+            }
 
                 //foreach (var connectors in room.connectors)
                 //{
@@ -164,7 +165,7 @@ namespace injectDll
                 //    Draw(pickup.transform.position, this.player, cam, $"pickup:{pickup.name} Dis:{distance}", Color.yellow);
                 //}
 
-            }
+        }
 
 
         }
@@ -193,6 +194,7 @@ namespace injectDll
 
             GUIStyle style = new GUIStyle(GUI.skin.label);
             style.normal.textColor = color;
+            
 
             GUI.Label(
                 new Rect(guiX, guiY, 400, 20),
