@@ -431,5 +431,8 @@
     <Compile Include="helper\Triggerbot.cs" />
     <Compile Include="helper\Universal.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="pics\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
