@@ -12,11 +12,9 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityUniversals;
 using 火湖;
-using static UnityEngine.GraphicsBuffer;
 
 namespace injectDll
 {
@@ -38,7 +36,7 @@ namespace injectDll
         {
             this.npcs = gameMgr.aliveNpcs;
             this.player.SetPlayer(gameMgr.PlayerScript);
-        }
+        
 
             Camera cam = gameMgr.currentCamera;
             double mouseSmoothing = 2.0;
