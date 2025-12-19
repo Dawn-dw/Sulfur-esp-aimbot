@@ -1,7 +1,10 @@
-﻿using PerfectRandom.Sulfur.Core.Units;
+﻿using PerfectRandom.Sulfur.Core.Items;
+using PerfectRandom.Sulfur.Core;
+using PerfectRandom.Sulfur.Core.Units;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using PerfectRandom.Sulfur.Core.LevelGeneration;
 
 namespace UnityUniversals
 {
@@ -9,6 +12,7 @@ namespace UnityUniversals
     {
         public Vector3 HeadPos;
         public Npc Npc;
+        public Player player;
     }
 
     public static class Aimbot
@@ -39,6 +43,8 @@ namespace UnityUniversals
                 float closestTargetDistance = float.MaxValue;
                 Vector2 closestTargetScreenPosition = Vector2.zero;
                 Npc npc = null;
+                Player player = null;
+
 
                 foreach (T target in targets)
                 {
@@ -58,6 +64,7 @@ namespace UnityUniversals
                             closestTargetDistance = distanceToCenter;
                             closestTargetScreenPosition = new Vector2(targetScreenPosition.x, Screen.height - targetScreenPosition.y);
                             npc = headPosition.Npc;
+                            player = headPosition.player;
                         }
                     }
                 }
@@ -75,8 +82,27 @@ namespace UnityUniversals
                         if (npc != null && npc.IsHostileTo(FactionIds.Player) && !npc.name.Contains("Trader") && !npc.name.Contains("Arthur") )
                         {
                             
-                            npc.Die();
+                            //npc.Die();
+                            foreach(var hitbox in npc.Hitboxes)
+                            {
+                                if (hitbox == null )
+                                {
+                                    continue;
+                                }
+                                if (player != null)
+                                {
+                                    hitbox.TakeHit(player.playerUnit.lastUsedWeapon.Damage, player.playerUnit.lastUsedWeapon.GetDamageType(), player.playerUnit, hitbox.transform.position);
+
+                                    //StaticInstance<LootManager>.Instance.SpawnLootFrom(StaticInstance<LootManager>.Instance.LootSettings.valuablesLootTable, player.transform.position,npc.currentRoom);
+                                    
+                                }
+                            }
+                            //for (int i = 0; i < 100; i++)
+                            //{
+                            //    StaticInstance<LootManager>.Instance.SpawnGlobalLoot(player.transform.position, npc);
+                            //}
                             Universal.mouse_event(0x0001, (int)distanceToMoveX, (int)distanceToMoveY, 0, 0);
+                            
                         }
                        
                         

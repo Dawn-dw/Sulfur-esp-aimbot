@@ -38,6 +38,12 @@
     <Reference Include="PerfectRandom.Sulfur.Core">
       <HintPath>..\dll\PerfectRandom.Sulfur.Core.dll</HintPath>
     </Reference>
+    <Reference Include="PerfectRandom.Sulfur.Gameplay">
+      <HintPath>..\dll\PerfectRandom.Sulfur.Gameplay.dll</HintPath>
+    </Reference>
+    <Reference Include="PerfectRandom.Sulfur.LevelGeneration">
+      <HintPath>..\dll\PerfectRandom.Sulfur.LevelGeneration.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />

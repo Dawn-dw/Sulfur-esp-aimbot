@@ -97,7 +97,7 @@ namespace injectDll
                         if (hitbox == null || !hitbox.LabelShort.Contains("Head") )
                         {
                             continue;
-            }
+                        }   
                         ESP.UniversalESP(hitbox.transform.position, cam, true, true, 2);
                         UpdateTargetNpcByMouse(cam, npc);
                     }
@@ -127,44 +127,37 @@ namespace injectDll
                     return;
                 foreach (var hiddenChests in room.hiddenChests)
                 {
-                float distance = Vector3.Distance(
-                this.player.GetPlayer().transform.position,
-                hiddenChests.transform.position
-                );
+                    float distance = Vector3.Distance(
+                    this.player.GetPlayer().transform.position,
+                    hiddenChests.transform.position
+                    );
                     Draw(hiddenChests.transform.position, this.player, cam, $"Chests:{hiddenChests.name} Dis:{distance}", Color.red);
-
-
-            }
+                 }
 
                 foreach (var containers in room.containers)
-            {
-                float distance = Vector3.Distance(
-                this.player.GetPlayer().transform.position,
-                containers.transform.position
-                );
+                {
+                    float distance = Vector3.Distance(
+                    this.player.GetPlayer().transform.position,
+                    containers.transform.position
+                    );
                     Draw(containers.transform.position, this.player, cam, $"Containers:{containers.name} Dis:{distance}", Color.green);
+                }
+
+
+                foreach (var connector in room.connectors)
+                {
+                    if (connector.connectionAllowed != ConnectionType.ExtensionRoom)
+                    {
+                        continue;
+                    }
+                    float distance = Vector3.Distance(
+                    this.player.GetPlayer().transform.position,
+                    connector.transform.position
+                    );
+                    Draw(connector.transform.position, this.player, cam, $"connector:{connector.name} Dis:{distance}", Color.yellow);
+                }
+
             }
-
-                //foreach (var connectors in room.connectors)
-                //{
-                //    float distance = Vector3.Distance(
-                //    this.player.GetPlayer().transform.position,
-                //    connectors.transform.position
-                //    );
-                //    Draw(connectors.transform.position, this.player, cam, $"connectors:{connectors.name} Dis:{distance}", Color.green);
-                //}
-
-                //foreach (var pickup in room.roomLOD.gameObjects)
-                //{
-                //    float distance = Vector3.Distance(
-                //    this.player.GetPlayer().transform.position,
-                //    pickup.transform.position
-                //    );
-                //    Draw(pickup.transform.position, this.player, cam, $"pickup:{pickup.name} Dis:{distance}", Color.yellow);
-                //}
-
-        }
-
 
         }
 
@@ -330,6 +323,7 @@ namespace injectDll
             var result = new HeadPositionResult();
             result.Npc = npc;
             result.HeadPos = npc.transform.position;
+            result.player = this.player.GetPlayer();
             foreach (var hb in npc.Hitboxes)
             {
                 
